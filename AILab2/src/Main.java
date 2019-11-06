@@ -22,13 +22,23 @@ class EqualizeHist {
             System.exit(0);
         }
         Imgproc.cvtColor(src, src, Imgproc.COLOR_BGR2GRAY);
+
+
         Mat dst = new Mat();
+        Mat nod = new Mat();
         Size size = new Size(500, 600);
         Imgproc.resize(src, src, size,0.4,0.4, Imgproc.INTER_AREA);
 
         HighGui.imshow( "Hist", new EqualizeHist().Hist(src) );
         Imgproc.equalizeHist( src, dst );
+
+        HighGui.imshow( "Hist", new EqualizeHist().Hist(src) );
+        Imgproc.equalizeHist( src, dst );
         HighGui.imshow( "Hist Demo", new EqualizeHist().Hist(dst) );
+        Core.normalize(src, nod, 0, 255, Core.NORM_MINMAX);
+        HighGui.imshow( "Hist nomal", new EqualizeHist().Hist(nod) );
+
+        HighGui.imshow( "No image", nod );
         HighGui.imshow( "Source image", src );
         HighGui.imshow( "Equalized Image", dst );
         HighGui.waitKey(0);
